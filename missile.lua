@@ -1,5 +1,5 @@
 
-text TextLabel()
+TextLabel()
 
 local function TextLabel()
 touchscreen:CreateElement("TextLabel", {
