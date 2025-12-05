@@ -1,4 +1,4 @@
-
+local touchscreen = GetPartFromPort(1, "TouchScreen")
 TextLabel()
 
 local function TextLabel()
