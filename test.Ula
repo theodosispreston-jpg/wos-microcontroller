@@ -1,0 +1,45 @@
+local Screen = GetPartFromPort(1, "TouchScreen")
+local Anchor = GetPartFromPort(2, "Anchor")
+
+
+if not Screen then
+    print("FATAL ERROR: TouchScreen not found on Port 1. Check wiring.")
+    return -- Stop script execution
+end
+
+Screen:CreateElement("TextLabel", { Position = UDim2.new(0.5, -50, 0, 10), Size = UDim2.new(0, 100, 0, 20), Text = "Main Menu", Name = "TitleLabel" })
+
+local PowerButton = Screen:CreateElement("TextButton", { Position = UDim2.new(0, 10, 0, 40), Size = UDim2.new(0, 150, 0, 30), Text = "Power Settings ->", Name = "GoToPower" })
+
+local function onPowerButtonClicked()
+    print("User clicked the Power Settings button!")
+    Anchor:Trigger()
+end
+
+PowerButton.MouseButton1Click:Connect(onPowerButtonClicked)
+
+
+while true do
+    wait(1) 
+end
+
+
+
+
+-- Fix applied here: changed 'screen' to 'Screen'
+Screen:CreateElement("TextLabel", { Position = UDim2.new(0.5, -50, 0, 10), Size = UDim2.new(0, 100, 0, 20), Text = "Main Menu", Name = "TitleLabel" })
+
+
+Screen:ClearElements()
+
+
+local function drawUI()
+    screen:Clear()
+    if currentPage == "MainMenu" then
+        screen:CreateElement("TextLabel", { Position = UDim2.new(0.5, -50, 0, 10), Size = UDim2.new(0, 100, 0, 20), Text = "Main Menu", Name = "TitleLabel" })
+        screen:CreateElement("TextButton", { Position = UDim2.new(0, 10, 0, 40), Size = UDim2.new(0, 150, 0, 30), Text = "Power Settings ->", Name = "GoToPower" })
+        
+    elseif currentPage == "PowerSettings" then
+        screen:CreateElement("TextButton", { Position = UDim2.new(0, 10, 0, 80), Size = UDim2.new(0, 150, 0, 30), Text = "<- Back", Name = "GoToMain" })
+    end
+end
