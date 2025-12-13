@@ -1,5 +1,4 @@
 local Screen = GetPartFromPort(1, "TouchScreen")
-local Anchor = GetPartFromPort(2, "Anchor")
 
 
 if not Screen then
@@ -13,7 +12,7 @@ local PowerButton = Screen:CreateElement("TextButton", { Position = UDim2.new(0,
 
 local function onPowerButtonClicked()
     print("User clicked the Power Settings button!")
-    Anchor:Trigger()
+    TriggerPort(2)
 end
 
 PowerButton.MouseButton1Click:Connect(onPowerButtonClicked)
