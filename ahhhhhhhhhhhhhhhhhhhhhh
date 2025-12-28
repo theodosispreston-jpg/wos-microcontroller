@@ -1,0 +1,52 @@
+local HYDRO_PORT_ID = 3
+local PART_CLASS_NAME = "Hydroponic" 
+
+-- Retrieve the parts/ports
+local Hydro = GetPartFromPort(3, "Hydroponic")
+local Port1 = GetPort(1)
+local Port2 = GetPort(2)
+
+-- Print status of the connections
+if Hydro then
+    print("Status: Hydroponic part found on Port 3.")
+else
+    print("Status: Hydroponic part NOT FOUND on Port 3!")
+end
+
+if Port1 then
+    print("Status: Port 1 trigger source FOUND.")
+else
+    print("Status: Port 1 trigger source NOT FOUND!")
+end
+
+if Port2 then
+    print("Status: Port 2 trigger source FOUND.")
+else
+    print("Status: Port 2 trigger source NOT FOUND!")
+end
+
+
+-- Function to handle the Hydroponics configuration
+local function configureHydroponic(resourceName)
+    if Hydro then
+        Hydro:Configure({Grow = resourceName})
+        print("Action: Configured Hydroponic Bay to " .. resourceName .. ".")
+    end
+end
+
+-- Connect the events
+if Port1 then
+    Port1.Triggered:Connect(function()
+        print("Event: Port 1 triggered!")
+        Hydro:Configure({Grow = "Grass"})
+        -- configureHydroponic("Grass")
+    end)
+end
+
+if Port2 then
+    Port2.Triggered:Connect(function()
+        print("Event: Port 2 triggered!")
+        Hydro:Configure({Grow = "Wood"})
+        -- configureHydroponic("Wood")
+    end)
+end
